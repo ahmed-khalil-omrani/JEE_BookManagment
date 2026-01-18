@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1f1f1f;
+            color: white;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: #e91313;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        #list {
+  
+            width: 100%;          
+            padding: 5px;         
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color:  #b61010;
+            color: white;
+            font-size: 16px;
+        }
+        #list option {
+            padding: 10px;          
+            margin-bottom: 5px;     
+            border-bottom: 1px solid #ccc; 
+        }
+        #list option:checked {
+            background-color: #007BFF; 
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <label for="list">liste de toutes les livres</label>
+    <select name="list" id="list" size="10"></select>
+    <br>
+    <button type="button" onclick="window.location.href='emprunter.html'">emprunter</button>
+    <script>
+        fetch('/api/livres')
+            .then(r => r.json())
+            .then(data => {
+                const select = document.getElementById('list');
+                if (!data.success) return;
+                data.livres.forEach(livre => {
+                    const opt = document.createElement('option');
+                    opt.value = livre.identifiant;
+                    opt.textContent = `${livre.titre} - ${livre.auteur}`;
+                    select.appendChild(opt);
+                });
+            });
+    </script>
+</body>
+</html>

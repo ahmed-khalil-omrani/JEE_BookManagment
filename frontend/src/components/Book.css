@@ -1,0 +1,136 @@
+/* --- 1. Main Book Card Styling (Replacing .book-container with .book-item) --- */
+.book-item {
+  /* Main container style */
+  border: 1px solid #ddd; /* Lighter border */
+  padding: 16px; /* Increased padding */
+  margin: 15px; /* Margin for spacing between cards */
+  background-color: #ffffff; /* White background */
+  border-radius: 8px; /* Slightly more rounded corners */
+  width: 300px; /* Fixed width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  display: flex; /* Enable flex for internal layout (if needed) */
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px; /* Ensure consistent height if covers vary */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 2. Book Content Details --- */
+.book-cover {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.book-details {
+  /* Padding/margin separation from image/actions */
+  padding-bottom: 10px;
+}
+
+.book-category {
+  font-size: 0.85em;
+  color: #3498db; /* A contrasting color for category */
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.book-title {
+  font-weight: bold;
+  font-size: 1.5em; /* Slightly larger */
+  margin-bottom: 8px;
+  color: #2c3e50;
+  line-height: 1.2;
+}
+
+/* Updated selectors to match .book-author and new .book-price/.book-quantity used in JSX */
+.book-author,
+.book-id {
+  margin: 4px 0;
+  color: #7f8c8d; /* Subtle gray */
+  font-size: 0.95em;
+}
+
+.book-price {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #27ae60; /* Green for price */
+  margin: 8px 0;
+}
+
+/* --- 3. Status and Availability --- */
+.book-quantity {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.book-status.available {
+  color: #27ae60; /* Success green */
+}
+
+.book-status.not-available {
+  color: #c0392b; /* Error red */
+}
+
+/* --- 4. Action Area Styling --- */
+.book-actions {
+  margin-top: auto; /* Pushes action block to the bottom of the flex container */
+  padding-top: 10px;
+  border-top: 1px solid #ecf0f1; /* Light separator line */
+}
+
+.button-group {
+  /* ➡️ CORRECTION FOR PADDING/SPACING BETWEEN BUTTONS */
+  display: flex;
+  gap: 10px; /* Adds 10px horizontal spacing between the Buy and Delete buttons */
+  margin-top: 5px; /* Small space above the buttons */
+  justify-content: flex-start; /* Align buttons to the start */
+}
+
+/* --- 5. Button and Blocked State Styling --- */
+.red-button {
+  background-color: #e60023;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Slightly adjusted padding */
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  flex-grow: 1; /* Allow buttons to grow if only one is present */
+  text-align: center;
+}
+.red-button:hover {
+  background-color: #b5001a;
+}
+/* Ensure the delete button looks distinct if desired */
+.delete-button {
+  background-color: #7f8c8d; /* A calmer color for Delete */
+}
+.delete-button:hover {
+  background-color: #34495e;
+}
+
+/* --- 6. Blocked State (Out of Stock) --- */
+.blocked {
+  opacity: 0.6; /* Reduced opacity */
+  pointer-events: none; /* Disable clicks */
+  background-color: #fcfcfc; /* White background with opacity */
+  border: 1px dashed #f5c6cb; /* Dashed border to indicate disabled state */
+  box-shadow: none; /* Remove shadow when blocked */
+}
+
+/* Override .book-item when blocked */
+.blocked.book-item {
+  border: 1px solid #f5c6cb;
+}
