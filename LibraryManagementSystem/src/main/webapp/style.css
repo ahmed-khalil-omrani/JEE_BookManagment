@@ -1,0 +1,440 @@
+/* ==========================================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================================== */
+:root {
+    /* Color Palette - Modern Dark Theme */
+    --bg-body: #0f172a;        /* Deep blue-gray background */
+    --bg-glass: rgba(30, 41, 59, 0.7); /* Glassmorphism background */
+    --bg-card: #1e293b;        /* Solid card background fallback */
+    --bg-input: #334155;       /* Input background */
+    
+    --text-main: #f8fafc;      /* Bright white text */
+    --text-muted: #94a3b8;     /* Muted blue-gray text */
+    
+    /* Accent Colors - CYAN & EMERALD THEME */
+    --accent-primary: #06b6d4; /* Cyan-500 */
+    --accent-hover: #0891b2;   /* Cyan-600 */
+    --accent-secondary: #10b981; /* Emerald-500 */
+
+    /* Borders & Shadows */
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --radius-lg: 16px;
+    --radius-md: 8px;
+    
+    /* Typography */
+    --font-main: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-body);
+    /* High quality background image */
+    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2228&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Dark overlay to make text readable */
+    box-shadow: inset 0 0 0 100vmax rgba(15, 23, 42, 0.85); 
+}
+
+/* ==========================================================
+   2. TYPOGRAPHY & LINKS
+   ========================================================== */
+h1, h2, h3, h4 {
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    color: var(--text-main);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+p {
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-secondary);
+    text-shadow: 0 0 8px rgba(6, 182, 212, 0.5); /* Cyan glow */
+}
+
+/* ==========================================================
+   3. LAYOUT & CONTAINERS
+   ========================================================== */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 2rem;
+}
+
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* ==========================================================
+   4. CARDS (Glassmorphism)
+   ========================================================== */
+.auth-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.book-card {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.book-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.table-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-glass);
+}
+
+/* ==========================================================
+   5. FORMS & INPUTS
+   ========================================================== */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    margin-bottom: 0.5rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+}
+
+/* ==========================================================
+   6. BUTTONS
+   ========================================================== */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Primary Button (Cyan Gradient) */
+.btn-primary, button[type="submit"] {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    width: 100%; 
+}
+
+.btn-primary:hover, button[type="submit"]:hover {
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+    background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent-primary) 100%);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border-glass);
+    color: var(--text-main);
+    width: auto;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Return Button (Green/Emerald) */
+.btn-return {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-return:hover {
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   7. NAVBAR
+   ========================================================== */
+.navbar {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-glass);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar a {
+    color: var(--text-muted);
+}
+
+.navbar a.nav-active, .navbar a:hover {
+    color: var(--accent-primary);
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}
+
+/* ==========================================================
+   8. DASHBOARD & COMPONENTS
+   ========================================================== */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.book-cover-container {
+    height: 320px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.book-card:hover .book-cover {
+    transform: scale(1.1);
+}
+
+.book-details {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.book-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-form, .admin-actions {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-actions {
+    padding-top: 0;
+    border-top: none;
+}
+
+.stock-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(6, 182, 212, 0.15); /* Cyan tint */
+    color: #22d3ee;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.stock-badge.out-of-stock {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+/* ==========================================================
+   9. TABLES (My Books)
+   ========================================================== */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--text-main);
+}
+
+th, td {
+    padding: 1.2rem; /* Increased padding for breathability */
+    text-align: left;
+    border-bottom: 1px solid var(--border-glass);
+    vertical-align: middle;
+}
+
+th {
+    background: rgba(0,0,0,0.3); /* Darker header */
+    color: var(--accent-primary); /* Cyan headers */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.badge-returned {
+    background: rgba(148, 163, 184, 0.2);
+    color: #94a3b8;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-overdue {
+    color: #fca5a5;
+    font-weight: 700;
+}
+
+.status-active {
+    color: #34d399; /* Green for active */
+    font-weight: 700;
+}
+
+/* ==========================================================
+   10. ALERTS
+   ========================================================== */
+.alert {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #059669;
+    color: #34d399;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid #b91c1c;
+    color: #fca5a5;
+}
